@@ -11,6 +11,7 @@ const navItems = [
   { href: "/potw", label: "POTW", icon: "🌟" },
   { href: "/events", label: "Events", icon: "📅" },
   { href: "/magazines", label: "Magazines", icon: "📰" },
+  { href: "/projects", label: "Projects", icon: "📁" },
 ];
 
 export default function Sidebar() {

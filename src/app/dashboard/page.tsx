@@ -12,6 +12,7 @@ interface Stats {
   potw: number;
   events: number;
   magazines: number;
+  projects: number;
 }
 
 const colorMap: Record<string, string> = {
@@ -26,6 +27,7 @@ const statCards = [
   { key: "potw", label: "POTW Entries", icon: "🌟", color: "aurora-green" },
   { key: "events", label: "Total Events", icon: "📅", color: "orbit-blue" },
   { key: "magazines", label: "Magazines", icon: "📰", color: "atmo-blue" },
+  { key: "projects", label: "Projects", icon: "📁", color: "aurora-green" },
 ];
 
 export default function DashboardPage() {
@@ -34,12 +36,13 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchStats = async () => {
-      const [members, gallery, potw, events, magazines] = await Promise.all([
+      const [members, gallery, potw, events, magazines, projects] = await Promise.all([
         supabase.from("profiles").select("id", { count: "exact", head: true }),
         supabase.from("gallery").select("id", { count: "exact", head: true }),
         supabase.from("potw").select("id", { count: "exact", head: true }),
         supabase.from("club_events").select("id", { count: "exact", head: true }),
         supabase.from("magazines").select("id", { count: "exact", head: true }),
+        supabase.from("projects").select("id", { count: "exact", head: true }),
       ]);
 
       setStats({
@@ -48,6 +51,7 @@ export default function DashboardPage() {
         potw: potw.count ?? 0,
         events: events.count ?? 0,
         magazines: magazines.count ?? 0,
+        projects: projects.count ?? 0,
       });
       setLoading(false);
     };
@@ -62,9 +66,9 @@ export default function DashboardPage() {
         <p className="text-text/50 text-sm mt-1">System overview and statistics</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {loading
-          ? Array.from({ length: 5 }).map((_, i) => <SkeletonCard key={i} />)
+          ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
           : statCards.map((card, index) => (
               <motion.div
                 key={card.key}

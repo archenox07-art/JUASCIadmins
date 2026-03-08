@@ -47,3 +47,13 @@ export interface Magazine {
   pdf_url: string | null;
   published_at: string | null;
 }
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string | null;
+  thumbnail_url: string | null;
+  pdf_url: string | null;
+  author: string | null;
+  created_at: string | null;
+}
