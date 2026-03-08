@@ -162,49 +162,49 @@ export default function EventsPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text">Events</h1>
-        <p className="text-text/50 text-sm mt-1">Manage club events</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-heading text-xl sm:text-2xl font-bold text-text tracking-wide">Events</h1>
+        <p className="text-text/50 text-xs sm:text-sm mt-1">Manage club events</p>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-400/10 border border-red-400/30 rounded-lg text-red-400 text-sm">
+        <div className="mb-4 p-3 bg-solar-flare/10 border border-solar-flare/30 rounded-lg text-solar-flare text-sm">
           {error}
           <button onClick={() => setError("")} className="ml-2 underline">Dismiss</button>
         </div>
       )}
 
       {/* Create Form */}
-      <div className="bg-panel border border-border rounded-xl p-6 mb-8">
-        <h2 className="font-heading text-lg font-semibold text-text mb-4">Create Event</h2>
+      <div className="bg-panel/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+        <h2 className="font-heading text-base sm:text-lg font-semibold text-text mb-4 tracking-wide">Create Event</h2>
         <form onSubmit={handleUpload} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Event Title"
               required
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="datetime-local"
               value={eventDate}
               onChange={(e) => setEventDate(e.target.value)}
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-orbit-blue file:text-white"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-stellar-gold file:text-background file:font-medium"
             />
           </div>
           <textarea
@@ -212,12 +212,12 @@ export default function EventsPage() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Event Description"
             rows={3}
-            className="w-full bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue resize-none"
+            className="w-full bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold resize-none transition-colors"
           />
           <button
             type="submit"
             disabled={uploading || !title}
-            className="px-6 py-2.5 bg-orbit-blue text-white rounded-lg text-sm font-medium hover:bg-orbit-blue/90 transition-colors disabled:opacity-50"
+            className="px-5 sm:px-6 py-3 sm:py-2.5 bg-stellar-gold text-background rounded-lg text-sm font-heading font-medium tracking-wide hover:bg-stellar-gold/90 transition-colors disabled:opacity-50"
           >
             {uploading ? "Creating..." : "Create Event"}
           </button>
@@ -225,16 +225,16 @@ export default function EventsPage() {
       </div>
 
       {/* Events Table */}
-      <div className="bg-panel border border-border rounded-xl overflow-hidden">
+      <div className="bg-panel/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Poster</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Title</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Location</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Date</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Actions</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Poster</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Title</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider hidden sm:table-cell">Location</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider hidden md:table-cell">Date</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -254,50 +254,50 @@ export default function EventsPage() {
                       transition={{ delay: index * 0.05 }}
                       className="border-b border-border/50 hover:bg-card/50 transition-colors"
                     >
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4">
                         {event.poster_url ? (
                           <img
                             src={event.poster_url}
                             alt={event.title}
-                            className="w-16 h-12 object-cover rounded border border-border"
+                            className="w-12 h-9 sm:w-16 sm:h-12 object-cover rounded border border-border"
                           />
                         ) : (
-                          <div className="w-16 h-12 bg-card border border-border rounded flex items-center justify-center text-text/30 text-xs">
+                          <div className="w-12 h-9 sm:w-16 sm:h-12 bg-card border border-border rounded flex items-center justify-center text-text/30 text-xs">
                             No poster
                           </div>
                         )}
                       </td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4">
                         {editingId === event.id ? (
                           <input
                             type="text"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                            className="bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue w-full"
+                            className="bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold w-full"
                           />
                         ) : (
-                          <span className="text-text font-medium">{event.title}</span>
+                          <span className="text-text font-medium text-xs sm:text-sm">{event.title}</span>
                         )}
                       </td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4 hidden sm:table-cell">
                         {editingId === event.id ? (
                           <input
                             type="text"
                             value={editLocation}
                             onChange={(e) => setEditLocation(e.target.value)}
-                            className="bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue w-full"
+                            className="bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold w-full"
                           />
                         ) : (
-                          <span className="text-text/70">{event.location || "—"}</span>
+                          <span className="text-text/70 text-xs sm:text-sm">{event.location || "—"}</span>
                         )}
                       </td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4 hidden md:table-cell">
                         {editingId === event.id ? (
                           <input
                             type="datetime-local"
                             value={editEventDate}
                             onChange={(e) => setEditEventDate(e.target.value)}
-                            className="bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                            className="bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                           />
                         ) : (
                           <span className="text-text/70 font-mono-tech text-xs">
@@ -307,12 +307,12 @@ export default function EventsPage() {
                           </span>
                         )}
                       </td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4">
                         {editingId === event.id ? (
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleEdit(event.id)}
-                              className="text-xs text-aurora-green hover:underline"
+                              className="text-xs text-solar-flare hover:underline"
                             >
                               Save
                             </button>
@@ -327,13 +327,13 @@ export default function EventsPage() {
                           <div className="flex gap-2">
                             <button
                               onClick={() => startEdit(event)}
-                              className="px-2 py-1 text-xs bg-card border border-border rounded text-text/50 hover:text-atmo-blue hover:border-atmo-blue/30 transition-colors"
+                              className="px-3 py-1.5 text-xs bg-card border border-border rounded text-text/50 hover:text-nebula-violet hover:border-nebula-violet/30 transition-colors"
                             >
                               Edit
                             </button>
                             <button
                               onClick={() => handleDelete(event)}
-                              className="px-2 py-1 text-xs bg-card border border-border rounded text-text/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                              className="px-3 py-1.5 text-xs bg-card border border-border rounded text-text/50 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
                             >
                               Delete
                             </button>

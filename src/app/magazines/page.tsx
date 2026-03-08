@@ -147,64 +147,64 @@ export default function MagazinesPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text">Magazines</h1>
-        <p className="text-text/50 text-sm mt-1">Manage club magazines</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-heading text-xl sm:text-2xl font-bold text-text tracking-wide">Magazines</h1>
+        <p className="text-text/50 text-xs sm:text-sm mt-1">Manage club magazines</p>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-400/10 border border-red-400/30 rounded-lg text-red-400 text-sm">
+        <div className="mb-4 p-3 bg-solar-flare/10 border border-solar-flare/30 rounded-lg text-solar-flare text-sm">
           {error}
           <button onClick={() => setError("")} className="ml-2 underline">Dismiss</button>
         </div>
       )}
 
       {/* Upload Form */}
-      <div className="bg-panel border border-border rounded-xl p-6 mb-8">
-        <h2 className="font-heading text-lg font-semibold text-text mb-4">Upload Magazine</h2>
+      <div className="bg-panel/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+        <h2 className="font-heading text-base sm:text-lg font-semibold text-text mb-4 tracking-wide">Upload Magazine</h2>
         <form onSubmit={handleUpload} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Magazine Title"
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="text"
               value={issue}
               onChange={(e) => setIssue(e.target.value)}
               placeholder="Issue (e.g., Vol. 1, Issue 3)"
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <div>
-              <label className="block text-xs text-text/50 mb-1.5 font-mono-tech uppercase">
+              <label className="block text-[10px] sm:text-xs text-text/50 mb-1.5 font-mono-tech uppercase tracking-wider">
                 Cover Image
               </label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={(e) => setCoverFile(e.target.files?.[0] || null)}
-                className="w-full bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-orbit-blue file:text-white"
+                className="w-full bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-stellar-gold file:text-background file:font-medium"
               />
             </div>
             <div>
-              <label className="block text-xs text-text/50 mb-1.5 font-mono-tech uppercase">
+              <label className="block text-[10px] sm:text-xs text-text/50 mb-1.5 font-mono-tech uppercase tracking-wider">
                 PDF File
               </label>
               <input
                 type="file"
                 accept=".pdf"
                 onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
-                className="w-full bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-orbit-blue file:text-white"
+                className="w-full bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-stellar-gold file:text-background file:font-medium"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={uploading}
-            className="px-6 py-2.5 bg-orbit-blue text-white rounded-lg text-sm font-medium hover:bg-orbit-blue/90 transition-colors disabled:opacity-50"
+            className="px-5 sm:px-6 py-3 sm:py-2.5 bg-stellar-gold text-background rounded-lg text-sm font-heading font-medium tracking-wide hover:bg-stellar-gold/90 transition-colors disabled:opacity-50"
           >
             {uploading ? "Uploading..." : "Upload Magazine"}
           </button>
@@ -212,7 +212,7 @@ export default function MagazinesPage() {
       </div>
 
       {/* Magazines Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
         {loading
           ? Array.from({ length: 4 }).map((_, i) => <SkeletonImage key={i} />)
           : magazines.map((magazine, index) => (
@@ -221,7 +221,7 @@ export default function MagazinesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-card border border-border rounded-xl overflow-hidden"
+                className="bg-card/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden"
               >
                 {magazine.cover_image ? (
                   <div className="aspect-[3/4] relative">
@@ -236,12 +236,12 @@ export default function MagazinesPage() {
                     📰
                   </div>
                 )}
-                <div className="p-4">
-                  <h3 className="font-heading font-semibold text-text truncate">
+                <div className="p-3 sm:p-4">
+                  <h3 className="font-heading font-semibold text-text truncate text-sm sm:text-base tracking-wide">
                     {magazine.title || "Untitled"}
                   </h3>
                   {magazine.issue && (
-                    <p className="text-xs text-atmo-blue mt-1">{magazine.issue}</p>
+                    <p className="text-xs text-nebula-violet mt-1">{magazine.issue}</p>
                   )}
                   {magazine.published_at && (
                     <p className="text-xs font-mono-tech text-text/30 mt-1">
@@ -254,14 +254,14 @@ export default function MagazinesPage() {
                         href={magazine.pdf_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-2 py-1 text-xs bg-background border border-border rounded text-text/50 hover:text-aurora-green hover:border-aurora-green/30 transition-colors"
+                        className="px-3 py-1.5 text-xs bg-background border border-border rounded text-text/50 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
                       >
                         Download
                       </a>
                     )}
                     <button
                       onClick={() => handleDelete(magazine)}
-                      className="px-2 py-1 text-xs bg-background border border-border rounded text-text/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                      className="px-3 py-1.5 text-xs bg-background border border-border rounded text-text/50 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
                     >
                       Delete
                     </button>

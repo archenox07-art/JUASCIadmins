@@ -30,34 +30,34 @@ export default function Header() {
   };
 
   return (
-    <header className="h-16 bg-panel border-b border-border flex items-center justify-between px-6">
+    <header className="h-14 sm:h-16 bg-panel/80 backdrop-blur-sm border-b border-border flex items-center justify-between px-4 pl-14 sm:pl-16 lg:px-6">
       <div>
-        <h2 className="font-heading text-sm font-semibold text-text/50 uppercase tracking-widest">
+        <h2 className="font-heading text-[10px] sm:text-xs font-semibold text-text/50 uppercase tracking-[0.2em]">
           Mission Control
         </h2>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
           {profile?.profile_image ? (
             <img
               src={profile.profile_image}
               alt="Admin"
-              className="w-8 h-8 rounded-full object-cover border border-border"
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-border"
             />
           ) : (
-            <div className="w-8 h-8 rounded-full bg-orbit-blue/20 flex items-center justify-center text-xs text-orbit-blue font-bold">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-stellar-gold/15 flex items-center justify-center text-xs text-stellar-gold font-bold">
               {profile?.name?.charAt(0) || "A"}
             </div>
           )}
-          <span className="text-sm text-text font-medium">
+          <span className="text-xs sm:text-sm text-text font-medium hidden sm:inline">
             {profile?.name || "Admin"}
           </span>
         </div>
 
         <button
           onClick={handleSignOut}
-          className="px-3 py-1.5 text-xs bg-card border border-border rounded-md text-text/70 hover:text-red-400 hover:border-red-400/30 transition-colors"
+          className="px-3 py-1.5 sm:py-1.5 text-xs bg-card border border-border rounded-md text-text/70 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
         >
           Sign Out
         </button>

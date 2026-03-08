@@ -108,30 +108,30 @@ export default function ProfilesPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text">Profiles</h1>
-        <p className="text-text/50 text-sm mt-1">Manage member accounts and plans</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-heading text-xl sm:text-2xl font-bold text-text tracking-wide">Profiles</h1>
+        <p className="text-text/50 text-xs sm:text-sm mt-1">Manage member accounts and plans</p>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-400/10 border border-red-400/30 rounded-lg text-red-400 text-sm">
+        <div className="mb-4 p-3 bg-solar-flare/10 border border-solar-flare/30 rounded-lg text-solar-flare text-sm">
           {error}
           <button onClick={() => setError("")} className="ml-2 underline">Dismiss</button>
         </div>
       )}
 
-      <div className="bg-panel border border-border rounded-xl overflow-hidden">
+      <div className="bg-panel/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Image</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Name</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Department</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Year</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Plan</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Role</th>
-                <th className="text-left p-4 text-text/50 font-mono-tech text-xs uppercase">Actions</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Image</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Name</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider hidden md:table-cell">Department</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider hidden lg:table-cell">Year</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Plan</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider hidden sm:table-cell">Role</th>
+                <th className="text-left p-3 sm:p-4 text-text/50 font-mono-tech text-[10px] sm:text-xs uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -145,60 +145,60 @@ export default function ProfilesPage() {
                   ))
                 : profiles.map((profile) => (
                     <tr key={profile.id} className="border-b border-border/50 hover:bg-card/50 transition-colors">
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4">
                         {profile.profile_image ? (
                           <img
                             src={profile.profile_image}
                             alt={profile.name || "User"}
-                            className="w-10 h-10 rounded-full object-cover border border-border"
+                            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-border"
                           />
                         ) : (
-                          <div className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-xs text-text/50">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-card border border-border flex items-center justify-center text-xs text-text/50">
                             {profile.name?.charAt(0) || "?"}
                           </div>
                         )}
                       </td>
-                      <td className="p-4 text-text font-medium">{profile.name || "—"}</td>
-                      <td className="p-4 text-text/70">{profile.department || "—"}</td>
-                      <td className="p-4 text-text/70 font-mono-tech">{profile.year || "—"}</td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4 text-text font-medium text-xs sm:text-sm">{profile.name || "—"}</td>
+                      <td className="p-3 sm:p-4 text-text/70 text-xs sm:text-sm hidden md:table-cell">{profile.department || "—"}</td>
+                      <td className="p-3 sm:p-4 text-text/70 font-mono-tech text-xs hidden lg:table-cell">{profile.year || "—"}</td>
+                      <td className="p-3 sm:p-4">
                         <select
                           value={profile.plan || "free"}
                           onChange={(e) => updatePlan(profile.id, e.target.value)}
-                          className="bg-card border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                          className="bg-card border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                         >
                           {PLANS.map((p) => (
                             <option key={p} value={p}>{p}</option>
                           ))}
                         </select>
                       </td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4 hidden sm:table-cell">
                         <select
                           value={profile.role || "member"}
                           onChange={(e) => updateRole(profile.id, e.target.value)}
-                          className="bg-card border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                          className="bg-card border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                         >
                           {ROLES.map((r) => (
                             <option key={r} value={r}>{r}</option>
                           ))}
                         </select>
                       </td>
-                      <td className="p-4">
-                        <div className="flex gap-2">
+                      <td className="p-3 sm:p-4">
+                        <div className="flex gap-1 sm:gap-2 flex-wrap">
                           <button
                             onClick={() => deleteProfileImage(profile.id, profile.profile_image)}
                             disabled={!profile.profile_image}
-                            className="px-2 py-1 text-xs bg-card border border-border rounded text-text/50 hover:text-yellow-400 hover:border-yellow-400/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs bg-card border border-border rounded text-text/50 hover:text-stellar-gold hover:border-stellar-gold/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                             title="Delete profile image"
                           >
-                            🗑️ Image
+                            🗑️ <span className="hidden sm:inline">Image</span>
                           </button>
                           <button
                             onClick={() => deleteAccount(profile.id)}
-                            className="px-2 py-1 text-xs bg-card border border-border rounded text-text/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                            className="px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs bg-card border border-border rounded text-text/50 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
                             title="Delete account"
                           >
-                            ✕ Delete
+                            ✕ <span className="hidden sm:inline">Delete</span>
                           </button>
                         </div>
                       </td>

@@ -16,18 +16,18 @@ interface Stats {
 }
 
 const colorMap: Record<string, string> = {
-  "orbit-blue": "text-orbit-blue",
-  "atmo-blue": "text-atmo-blue",
-  "aurora-green": "text-aurora-green",
+  "stellar-gold": "text-stellar-gold",
+  "nebula-violet": "text-nebula-violet",
+  "solar-flare": "text-solar-flare",
 };
 
 const statCards = [
-  { key: "members", label: "Total Members", icon: "👤", color: "orbit-blue" },
-  { key: "gallery", label: "Gallery Images", icon: "🖼️", color: "atmo-blue" },
-  { key: "potw", label: "POTW Entries", icon: "🌟", color: "aurora-green" },
-  { key: "events", label: "Total Events", icon: "📅", color: "orbit-blue" },
-  { key: "magazines", label: "Magazines", icon: "📰", color: "atmo-blue" },
-  { key: "projects", label: "Projects", icon: "📁", color: "aurora-green" },
+  { key: "members", label: "Total Members", icon: "👤", color: "stellar-gold" },
+  { key: "gallery", label: "Gallery Images", icon: "🖼️", color: "nebula-violet" },
+  { key: "potw", label: "POTW Entries", icon: "🌟", color: "solar-flare" },
+  { key: "events", label: "Total Events", icon: "📅", color: "stellar-gold" },
+  { key: "magazines", label: "Magazines", icon: "📰", color: "nebula-violet" },
+  { key: "projects", label: "Projects", icon: "📁", color: "solar-flare" },
 ];
 
 export default function DashboardPage() {
@@ -61,12 +61,12 @@ export default function DashboardPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text">Dashboard</h1>
-        <p className="text-text/50 text-sm mt-1">System overview and statistics</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-heading text-xl sm:text-2xl font-bold text-text tracking-wide">Dashboard</h1>
+        <p className="text-text/50 text-xs sm:text-sm mt-1">System overview and statistics</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         {loading
           ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
           : statCards.map((card, index) => (
@@ -75,18 +75,18 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.4 }}
-                className="bg-card border border-border rounded-xl p-6 hover:border-border/80 transition-colors"
+                className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 hover:border-border/80 transition-colors"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl">{card.icon}</span>
-                  <span className={`text-xs font-mono-tech ${colorMap[card.color]}`}>
+                <div className="flex items-center justify-between mb-2 sm:mb-3">
+                  <span className="text-xl sm:text-2xl">{card.icon}</span>
+                  <span className={`text-[10px] sm:text-xs font-mono-tech ${colorMap[card.color]}`}>
                     LIVE
                   </span>
                 </div>
-                <p className="font-mono-tech text-3xl font-bold text-text">
+                <p className="font-mono-tech text-2xl sm:text-3xl font-bold text-text">
                   {stats?.[card.key as keyof Stats] ?? 0}
                 </p>
-                <p className="text-xs text-text/50 mt-1">{card.label}</p>
+                <p className="text-[10px] sm:text-xs text-text/50 mt-1">{card.label}</p>
               </motion.div>
             ))}
       </div>

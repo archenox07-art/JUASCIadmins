@@ -154,49 +154,49 @@ export default function POTWPage() {
 
   return (
     <AdminLayout>
-      <div className="mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text">Picture of the Week</h1>
-        <p className="text-text/50 text-sm mt-1">Manage POTW entries</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-heading text-xl sm:text-2xl font-bold text-text tracking-wide">Picture of the Week</h1>
+        <p className="text-text/50 text-xs sm:text-sm mt-1">Manage POTW entries</p>
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-400/10 border border-red-400/30 rounded-lg text-red-400 text-sm">
+        <div className="mb-4 p-3 bg-solar-flare/10 border border-solar-flare/30 rounded-lg text-solar-flare text-sm">
           {error}
           <button onClick={() => setError("")} className="ml-2 underline">Dismiss</button>
         </div>
       )}
 
       {/* Upload Form */}
-      <div className="bg-panel border border-border rounded-xl p-6 mb-8">
-        <h2 className="font-heading text-lg font-semibold text-text mb-4">Add POTW Entry</h2>
+      <div className="bg-panel/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+        <h2 className="font-heading text-base sm:text-lg font-semibold text-text mb-4 tracking-wide">Add POTW Entry</h2>
         <form onSubmit={handleUpload} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               required
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-orbit-blue file:text-white"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-stellar-gold file:text-background file:font-medium"
             />
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="text"
               value={photographer}
               onChange={(e) => setPhotographer(e.target.value)}
               placeholder="Photographer"
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold transition-colors"
             />
             <input
               type="date"
               value={weekDate}
               onChange={(e) => setWeekDate(e.target.value)}
-              className="bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text focus:outline-none focus:border-orbit-blue"
+              className="bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text focus:outline-none focus:border-stellar-gold transition-colors"
             />
           </div>
           <textarea
@@ -204,12 +204,12 @@ export default function POTWPage() {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             rows={3}
-            className="w-full bg-card border border-border rounded-lg px-4 py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-orbit-blue resize-none"
+            className="w-full bg-card border border-border rounded-lg px-4 py-3 sm:py-2.5 text-sm text-text placeholder:text-text/30 focus:outline-none focus:border-stellar-gold resize-none transition-colors"
           />
           <button
             type="submit"
             disabled={uploading || !file}
-            className="px-6 py-2.5 bg-orbit-blue text-white rounded-lg text-sm font-medium hover:bg-orbit-blue/90 transition-colors disabled:opacity-50"
+            className="px-5 sm:px-6 py-3 sm:py-2.5 bg-stellar-gold text-background rounded-lg text-sm font-heading font-medium tracking-wide hover:bg-stellar-gold/90 transition-colors disabled:opacity-50"
           >
             {uploading ? "Uploading..." : "Add Entry"}
           </button>
@@ -217,7 +217,7 @@ export default function POTWPage() {
       </div>
 
       {/* Entries Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {loading
           ? Array.from({ length: 6 }).map((_, i) => <SkeletonImage key={i} />)
           : entries.map((entry, index) => (
@@ -226,7 +226,7 @@ export default function POTWPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-card border border-border rounded-xl overflow-hidden"
+                className="bg-card/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden"
               >
                 <div className="aspect-video relative">
                   <img
@@ -235,7 +235,7 @@ export default function POTWPage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-4">
+                <div className="p-3 sm:p-4">
                   {editingId === entry.id ? (
                     <div className="space-y-2">
                       <input
@@ -243,32 +243,32 @@ export default function POTWPage() {
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
                         placeholder="Title"
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                        className="w-full bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                       />
                       <input
                         type="text"
                         value={editPhotographer}
                         onChange={(e) => setEditPhotographer(e.target.value)}
                         placeholder="Photographer"
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                        className="w-full bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                       />
                       <textarea
                         value={editDescription}
                         onChange={(e) => setEditDescription(e.target.value)}
                         placeholder="Description"
                         rows={2}
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue resize-none"
+                        className="w-full bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold resize-none"
                       />
                       <input
                         type="date"
                         value={editWeekDate}
                         onChange={(e) => setEditWeekDate(e.target.value)}
-                        className="w-full bg-background border border-border rounded px-2 py-1 text-xs text-text focus:outline-none focus:border-orbit-blue"
+                        className="w-full bg-background border border-border rounded px-2 py-1.5 text-xs text-text focus:outline-none focus:border-stellar-gold"
                       />
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleEdit(entry.id)}
-                          className="text-xs text-aurora-green hover:underline"
+                          className="text-xs text-solar-flare hover:underline"
                         >
                           Save
                         </button>
@@ -282,8 +282,8 @@ export default function POTWPage() {
                     </div>
                   ) : (
                     <>
-                      <h3 className="font-heading font-semibold text-text">{entry.title || "Untitled"}</h3>
-                      <p className="text-xs text-atmo-blue mt-1">{entry.photographer || "Unknown"}</p>
+                      <h3 className="font-heading font-semibold text-text text-sm sm:text-base tracking-wide">{entry.title || "Untitled"}</h3>
+                      <p className="text-xs text-nebula-violet mt-1">{entry.photographer || "Unknown"}</p>
                       <p className="text-xs text-text/50 mt-1 line-clamp-2">{entry.description || ""}</p>
                       {entry.week_date && (
                         <p className="text-xs font-mono-tech text-text/30 mt-2">{entry.week_date}</p>
@@ -294,13 +294,13 @@ export default function POTWPage() {
                     <div className="flex gap-2 mt-3">
                       <button
                         onClick={() => startEdit(entry)}
-                        className="px-2 py-1 text-xs bg-background border border-border rounded text-text/50 hover:text-atmo-blue hover:border-atmo-blue/30 transition-colors"
+                        className="px-3 py-1.5 text-xs bg-background border border-border rounded text-text/50 hover:text-nebula-violet hover:border-nebula-violet/30 transition-colors"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(entry)}
-                        className="px-2 py-1 text-xs bg-background border border-border rounded text-text/50 hover:text-red-400 hover:border-red-400/30 transition-colors"
+                        className="px-3 py-1.5 text-xs bg-background border border-border rounded text-text/50 hover:text-solar-flare hover:border-solar-flare/30 transition-colors"
                       >
                         Delete
                       </button>
